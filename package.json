@@ -1,6 +1,6 @@
 {
   "name": "aftertimesync",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "do actions after local time is synced",
   "main": "index.js",
   "scripts": {

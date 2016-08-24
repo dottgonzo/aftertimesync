@@ -3,8 +3,8 @@ import * as superagent from "superagent";
 
 
 
-export default function timeSynced(interval?: number) {
-    return new Promise((resolve, reject) => {
+export default function timeSynced(interval?: number):Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
 
 
         function checkTime() {

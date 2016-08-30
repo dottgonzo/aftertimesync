@@ -29,7 +29,7 @@ export default function timeSynced(interval?: number, timeout?: number): Promise
         }
 
 
-        if (!interval) interval = 5000
+        if (!interval) interval = 20000
         if (!timeout) timeout = 200
 
         let timeoutcycle = 0

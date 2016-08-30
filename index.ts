@@ -3,7 +3,7 @@ import * as superagent from "superagent";
 
 
 
-export default function timeSynced(interval?: number):Promise<boolean> {
+export default function timeSynced(interval?: number, timeout?: number): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
 
 
@@ -30,6 +30,10 @@ export default function timeSynced(interval?: number):Promise<boolean> {
 
 
         if (!interval) interval = 5000
+        if (!timeout) timeout = 200
+
+        let timeoutcycle = 0
+
 
         checkTime().then(() => {
             resolve(true)
@@ -38,8 +42,14 @@ export default function timeSynced(interval?: number):Promise<boolean> {
 
             const startcheck = setInterval(() => {
                 checkTime().then(() => {
+                    timeoutcycle = 0
                     clearInterval(startcheck)
                     resolve(true)
+                }).catch((err) => {
+                    timeoutcycle += 1
+                    if (timeout&&timeoutcycle > timeout) {
+                        reject('timeout')
+                    }
                 })
             }, interval)
 

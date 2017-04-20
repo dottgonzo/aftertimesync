@@ -15,6 +15,7 @@ function setTimeManually() {
             if (err) {
                 reject(err)
             } else {
+                console.log('time set manually')
                 resolve(true)
             }
         })
@@ -34,7 +35,6 @@ export default function timeSynced(interval?: number, timeout?: number): Promise
 
                     if (err) {
                         if (options && options.setmanually) {
-                            console.log('setmanually')
                             setTimeManually().then(() => {
                                 resolve(true);
                             }).catch((err) => {
@@ -42,8 +42,7 @@ export default function timeSynced(interval?: number, timeout?: number): Promise
                             })
 
                         } else {
-                            reject('unreachable time')
-
+                            console.log('unreachable time')
                             reject(err)
                         }
                     } else {
